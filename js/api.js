@@ -1,6 +1,4 @@
-accounting.settings.currency.symbol = '￥';
-Template7.registerHelper('formatMoney', accounting.formatMoney);
-
+let _apiHost = '2132';
 function getJSON(url) {
     return $.getJSON(url).then(function(data) {
         console.log('CALL API', url, data);
@@ -68,35 +66,6 @@ function getOrderInfo() {
 function sellStock(id) {
     var url = `${_apiHost}/users/sell_fund/${id}`;
     return getJSON(url);
-}
-
-function confirmSell(id) {
-    console.log("test" + this.router);
-    app.dialog.confirm(
-        "请确认行权信息", '权盈金服',
-
-        function() {
-
-            self.sellStock(id).then(function(data) {
-                if (data != null) {
-                    let status = data['status'];
-                    let msg = data['msg'];
-                    if (status === true) {
-                        qAlert('您的行权申请已经提交');
-                        //window.location.href = 'new url'; //for external link
-                        //window.open(''); // the same as target=_blank
-                        console.log(mainView.router);
-                        mainView.router.navigate('/tabPage'); // to load internal page
-                    } else {
-                        qAlert(msg);
-                    }
-                } else {
-                    qAlert('您的行权申请已经提交');
-                }
-            }, function(data) {
-                qAlert('您的行权申请已经提交');
-            })
-        });
 }
 
 function sendSMS(phoneNo) {
@@ -177,16 +146,6 @@ function getBankInfo() {
     return getJSON(url);
 }
 
-function qAlert(msg) {
-    return app.dialog.alert(msg, _appTitle);
-}
-
-function qConfirm(msg1, msg2) {
-    return app.dialog.confirm(msg1, _appTitle, function() {
-        app.dialog.alert(msg2, _appTitle);
-    });
-}
-
 function getPayRecord() {
     return getPersonInfo().then(function(data) {
         var d = $.Deferred();
@@ -260,303 +219,6 @@ function getReflectRec() {
     });
 }
 
-function tabIndexAsyncRoute(routeTo, routeFrom, resolve, reject) {
-    var router = this;
-    var app = router.app;
-    app.preloader.show();
-    let ctx = {};
-    let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
-    let customSpec = {
-        context: ctx
-    }
-    resolve(routeInfo, customSpec);
-    app.preloader.hide();
-}
-
-function tabAccountAsyncRoute(routeTo, routeFrom, resolve, reject) {
-    var router = this;
-    var app = router.app;
-    app.preloader.show();
-    let ctx = {
-        money: "--",
-        hasBankCard: false,
-        showIdCardFunc: true
-    };
-    let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
-    let customSpec = {
-        context: ctx
-    }
-    $.when(fetchBankInfo(), fetchAccountInfo())
-        .done(function(data) {
-            let accountInfo = app.data.accountInfo;
-            let bankInfo = app.data.bankInfo;
-            let userInfo = app.data.userInfo;
-            if (accountInfo != null) {
-                ctx['money'] = accounting.formatMoney(accountInfo['total']);
-            }
-            if (bankInfo != null && bankInfo.length > 0) {
-                ctx['hasBankCard'] = true;
-            }
-            if (userInfo['status'] === "2") {
-                ctx['showIdCardFunc'] = false;
-            }
-        })
-        .always(function() {
-            resolve(routeInfo, customSpec);
-            app.preloader.hide();
-        })
-}
-
-function tabTradeAsyncRoute(routeTo, routeFrom, resolve, reject) {
-    var router = this;
-    var app = router.app;
-    app.preloader.show();
-    let ctx = {};
-    let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
-    let customSpec = {
-        context: ctx
-    }
-    resolve(routeInfo, customSpec);
-    app.preloader.hide();
-}
-
-function rechargeAsyncRoute(routeTo, routeFrom, resolve, reject) {
-    var router = this;
-    var app = router.app;
-    //check idCard
-    if (isIdCardConfirming()) {
-        reject();
-        qAlert('实名认证审核中');
-        return;
-    }
-    if (!isIdCardConfirm()) {
-        reject();
-        qAlert('您尚未进行实名认证，请先进行认证。').on('close', function() {
-            router.navigate('/idConfirm', { history: false });
-        })
-        return;
-    }
-    app.preloader.show();
-    let ctx = {
-        hasRechargeRec: false,
-        rechargeRec: []
-    };
-    let routeInfo = { componentUrl: routeTo.route.componentUrlAlias };
-    let customSpec = {
-        context: ctx
-    }
-    let rechargeList = app.data.rechargeList;
-    ctx['hasRechargeRec'] = (rechargeList != null && rechargeList.length > 0);
-    ctx['rechargeRec'] = rechargeList;
-    resolve(routeInfo, customSpec);
-    app.preloader.hide();
-}
-
-function reflectAsyncRoute(routeTo, routeFrom, resolve, reject) {
-    var router = this;
-    let app = router.app;
-    //check idCard
-    if (isIdCardConfirming()) {
-        reject();
-        qAlert('实名认证审核中');
-        return;
-    }
-    if (!isIdCardConfirm()) {
-        reject();
-        qAlert('您尚未进行实名认证，请先进行认证。').on('close', function() {
-            router.navigate('/idConfirm', { history: false });
-        })
-        return;
-    }
-    //check bankCard
-    if (app.data.bankInfo == null || app.data.bankInfo.length == 0) {
-        reject();
-        qAlert('您尚未绑定银行卡，请先进行绑定。').on('close', function() {
-            router.navigate('/addBankInfo', { history: false });
-        })
-        return;
-    }
-    app.preloader.show();
-    let ctx = {
-        hasRechargeRec: false,
-        hasBankCard: false,
-        bankCard: {},
-        rechargeRec: []
-    };
-    let routeInfo = { componentUrl: routeTo.route.componentUrlAlias };
-    let customSpec = {
-        context: ctx
-    }
-    let reflectList = app.data.reflectList;
-    let bankInfo = app.data.bankInfo;
-    ctx['hasRechargeRec'] = (reflectList != null && reflectList.length > 0);
-    ctx['rechargeRec'] = reflectList;
-    if (bankInfo != null && bankInfo.length > 0) {
-        ctx['hasBankCard'] = true;
-        ctx['bankCard'] = bankInfo[bankInfo.length - 1]['Bank'];
-    }
-    resolve(routeInfo, customSpec);
-    app.preloader.hide();
-}
-
-function addBankInfoAsyncRoute(routeTo, routeFrom, resolve, reject) {
-    var router = this;
-    var app = router.app;
-    //check idCard
-    if (isIdCardConfirming()) {
-        reject();
-        qAlert('实名认证审核中');
-        return;
-    }
-    if (!isIdCardConfirm()) {
-        reject();
-        qAlert('您尚未进行实名认证，请先进行认证。').on('close', function() {
-            router.navigate('/idConfirm', { history: false });
-        })
-        return;
-    }
-    app.preloader.show();
-    let ctx = {
-        money: "--",
-        hasIdCard: false,
-        hasBankCard: false,
-        hasBankAccountName: false,
-        name: '',
-        idCard: "",
-        bankCard: {}
-    };
-    let routeInfo = { componentUrl: routeTo.route.componentUrlAlias };
-    let customSpec = {
-        context: ctx
-    }
-    let bankInfo = app.data.bankInfo;
-    let userInfo = app.data.userInfo;
-    let accountInfo = app.data.accountInfo;
-    if (bankInfo != null && bankInfo.length > 0) {
-        ctx['hasBankCard'] = true;
-        ctx['bankCard'] = bankInfo[bankInfo.length - 1]['Bank'];
-    }
-    if (userInfo != null) {
-        if (userInfo['personal_code'] != null) {
-            ctx['hasIdCard'] = true;
-            ctx['idCard'] = userInfo['personal_code'];
-            if (userInfo['name'] != null && $.trim(userInfo['name'] !== "")) {
-                ctx['hasBankAccountName'] = true;
-                ctx['name'] = userInfo['name'];
-            }
-        }
-    }
-    if (accountInfo != null) {
-        ctx['money'] = accounting.formatMoney(accountInfo['total']);
-    }
-    resolve(routeInfo, customSpec);
-    app.preloader.hide();
-}
-
-function idConfirmAsyncRoute(routeTo, routeFrom, resolve, reject) {
-    var router = this;
-    var app = router.app;
-    //check idCard
-    if (isIdCardConfirming()) {
-        reject();
-        qAlert('实名认证审核中');
-        return;
-    }
-    app.preloader.show();
-    let ctx = {
-        name: ''
-    };
-    let routeInfo = { componentUrl: routeTo.route.componentUrlAlias };
-    let customSpec = {
-        context: ctx
-    }
-    let userInfo = app.data.userInfo;
-    if (userInfo != null && $.trim(userInfo['name']) !== "") {
-        ctx['name'] = userInfo['name'];
-    }
-    resolve(routeInfo, customSpec);
-    app.preloader.hide();
-}
-
-function inviteCodeAsyncRoute(routeTo, routeFrom, resolve, reject) {
-    var router = this;
-    var app = router.app;
-    //check idCard
-    if (isIdCardConfirming()) {
-        reject();
-        qAlert('实名认证审核中');
-        return;
-    }
-    if (!isIdCardConfirm()) {
-        reject();
-        qAlert('您尚未进行实名认证，请先进行认证。').on('close', function() {
-            router.navigate('/idConfirm', { history: false });
-        })
-        return;
-    }
-
-    app.preloader.show();
-    let ctx = {
-        inviteCode: "---",
-        inviteLink: location.origin,
-    };
-    let routeInfo = { componentUrl: routeTo.route.componentUrlAlias };
-    let customSpec = {
-        context: ctx
-    }
-    if (app.data.inviteCode == null) {
-        $.when(fetchInviteCode())
-            .done(function() {
-                ctx['inviteCode'] = app.data.inviteCode;
-                ctx['inviteLink'] = `${location.origin}?inviteCode=${app.data.inviteCode}`;
-            })
-            .always(function() {
-                resolve(routeInfo, customSpec);
-                app.preloader.hide();
-            })
-    } else {
-        ctx['inviteCode'] = app.data.inviteCode;
-        ctx['inviteLink'] = `${location.origin}?inviteCode=${app.data.inviteCode}`;
-        resolve(routeInfo, customSpec);
-        app.preloader.hide();
-    }
-}
-
-function tradeDetailAsyncRoute(routeTo, routeFrom, resolve, reject) {
-    var router = this;
-    var app = router.app;
-    app.preloader.show();
-    let ctx = {
-        code: "----",
-        detailAry: [],
-        currentStock: null,
-        price: '----',
-        money: '----'
-    };
-    ctx['code'] = routeTo['params']['code'];
-    ctx['detailAry'] = app.data.quotationList[ctx['code']];
-    ctx['currentStock'] = ctx['detailAry'][0];
-    let routeInfo = { componentUrl: routeTo.route.componentUrlAlias };
-    let customSpec = {
-        context: ctx
-    }
-    let accountInfo = app.data.accountInfo;
-    if (accountInfo != null) {
-        ctx['money'] = accounting.formatMoney(accountInfo['total']);
-    }
-    stockQuote(ctx['code'])
-        .done(function(data) {
-            let status = data['status'];
-            let msg = JSON.parse(data['msg']);
-            if (status === true) {
-                ctx['price'] = msg['buyOnePri'];
-            }
-        })
-        .always(function(arguments) {
-            resolve(routeInfo, customSpec);
-            app.preloader.hide();
-        })
-}
 
 function stockQuote(code) {
     let url = `${_apiHost}/app/get_detail_by_code/${code}`;
@@ -580,13 +242,6 @@ function getInviteCode() {
     return getJSON(url);
 }
 
-function setActiveTabLink(index) {
-    let _index = index || 0;
-    $('.view-main .main-tab-link')
-        .removeClass('tab-link-active')
-        .eq(_index)
-        .addClass('tab-link-active');
-}
 
 function fetchAccountInfo() {
     return getPersonInfo().then(function(data) {
@@ -719,16 +374,6 @@ function isIdCardConfirming() {
         isConfirm = (status === "1");
     }
     return isConfirm;
-}
-
-function loadingWrap(promise) {
-    if (promise && promise.then) {
-        app.preloader.show();
-        promise.always(function() {
-            app.preloader.hide();
-        })
-    }
-    return promise;
 }
 
 function fetchWechatPhoto() {

@@ -34,165 +34,19 @@
     </div>
   </div>
   <!-- Path to Framework7 Library JS-->
-  <script type="text/javascript" src="/js/qyjf/framework7.min.js"></script>
-  <script type="text/javascript" src="/js/qyjf/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/qyjf/lodash.min.js"></script>
-  <script type="text/javascript" src="/js/qyjf/accounting.min.js"></script>
-  <script type="text/javascript" src="/js/qyjf/qrcode.min.js"></script>
-  <script type="text/javascript" src="/js/qyjf/common.js?v=14"></script>
+  <script type="text/javascript" src="./js/framework7.min.js"></script>
+  <script type="text/javascript" src="./js/jquery.min.js"></script>
+  <script type="text/javascript" src="./js/lodash.min.js"></script>
+  <script type="text/javascript" src="./js/accounting.min.js"></script>
+  <script type="text/javascript" src="./js/qrcode.min.js"></script>
+  <script type="text/javascript" src="./js/common.js"></script>
+  <script type="text/javascript" src="./js/api.js"></script>
+  <script type="text/javascript" src="./js/routes.js"></script>
+  <script type="text/javascript" src="./js/app.js"></script>
   <script>
-  // Initialize your app
-  var app = new Framework7({
-    root: '#app',
-    theme: "ios",
-    view: {
-      iosDynamicNavbar: false,
-    },
-    routes: [{
-        path: '/main',
-        url: '/pages/get/qyjf_tab_page.ctp',
-        tabs: [{
-            path: '/tab1',
-            id: 'tab1',
-            componentUrlAlias: '/pages/get/qyjf_tab_index.ctp',
-            async: tabIndexAsyncRoute
-          },
-          {
-            path: '/tab2',
-            id: 'tab2',
-            componentUrlAlias: '/pages/get/qyjf_tab_trade.ctp',
-            async: tabTradeAsyncRoute
-          },
-          {
-            path: '/tab3',
-            id: 'tab3',
-            componentUrl: '/pages/get/qyjf_tab_stocks.ctp',
-          },
-          {
-            path: '/tab4',
-            id: 'tab4',
-            componentUrlAlias: '/pages/get/qyjf_tab_account.ctp',
-            async: tabAccountAsyncRoute
-          }
-        ],
-      },
-      {
-        path: '/tabPage',
-        redirect: '/main/tab1'
-      },
-      {
-        path: '/tradeIndex',
-        redirect: '/main/tab2'
-      },
-      {
-        path: '/StockIndex',
-        redirect: '/main/tab3'
-      },
-      {
-        path: '/AccountIndex',
-        redirect: '/main/tab4'
-      },
-      {
-        path: '/checkLogin',
-        componentUrl: '/pages/get/qyjf_check_login.ctp',
-      },
-      {
-        path: '/login',
-        componentUrl: '/pages/get/qyjf_login.ctp',
-      },
-      {
-        path: '/recharge',
-        componentUrlAlias: '/pages/get/qyjf_recharge.ctp',
-        async: rechargeAsyncRoute
-      },
-      {
-        path: '/reflect',
-        componentUrlAlias: '/pages/get/qyjf_reflect.ctp',
-        async: reflectAsyncRoute
-      },
-      {
-        path: '/firstLogin',
-        componentUrl: '/pages/get/qyjf_first_login.ctp',
-      },
-      {
-        path: '/fistAddInfo',
-        componentUrl: '/pages/get/qyjf_first_add_person_info.ctp',
-      },
-      {
-        path: '/addBankInfo',
-        componentUrlAlias: '/pages/get/qyjf_add_bankinfo.ctp',
-        async: addBankInfoAsyncRoute
-      },
-      {
-        path: '/investDoc',
-        componentUrl: '/pages/get/qyjf_invest_doc.ctp',
-      },
-      {
-        path: '/wecharPay',
-        componentUrl: '/pages/get/qyjf_wechatpay.ctp',
-      },
-      {
-        path: '/bankAcPay',
-        componentUrl: '/pages/get/qyjf_bankacpay.ctp',
-      },
-      {
-        path: '/idConfirm',
-        componentUrlAlias: '/pages/get/qyjf_id_confirm.ctp',
-        async: idConfirmAsyncRoute
-      },
-      {
-        path: '/customService',
-        componentUrl: '/pages/get/qyjf_custom_service.ctp',
-      },
-      {
-        path: '/publicService',
-        componentUrl: '/pages/get/qyjf_public_service.ctp',
-      },
-      {
-        path: '/inviteCode',
-        componentUrlAlias: '/pages/get/qyjf_invite_code.ctp',
-        async: inviteCodeAsyncRoute
-      },
-      {
-        path: '/trade/:code',
-        componentUrlAlias: '/pages/get/qyjf_tab_trade_detail.ctp',
-        async: tradeDetailAsyncRoute
-      }
-    ],
-  });
-
-  // Export selectors engine
-  var $$ = Dom7;
-
-  saveInviteCode();
-  fixAosHeight();
-  var mainView = app.views.create('.view-main');
-  mainView.router.on('routerAjaxError',function() {
-    qAlert('网络繁忙，请稍后重试');
+  $(function() {
+   
   })
-
-  function fixAosHeight() {
-    let tempH = $(document.body).height();
-    let tempW = $(document.body).width();
-    let max, min = null;
-    if (tempH > tempW) {
-      max = tempH;
-      min = tempW;
-    } else {
-      max = tempW;
-      min = tempH;
-    }
-    $(window).on('resize', function() {
-      let h = window.screen.height;
-      let w = window.screen.width;
-      if (h > w) {
-        $(document.body).height(max);
-      } else {
-        $(document.body).height(min);
-      }
-    })
-  }
-
   </script>
 </body>
 
