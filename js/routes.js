@@ -9,16 +9,16 @@ let _mainView_routes = [{
     }, {
         path: '/tab2',
         id: 'tab2',
-        componentUrlAlias: './pages/tab_trade.html',
+        componentUrlAlias: './pages/tab_coding.html',
         async: tabTradeAsyncRoute
     }, {
         path: '/tab3',
         id: 'tab3',
-        componentUrl: './pages/tab_stocks.html',
+        componentUrl: './pages/tab_working.html',
     }, {
         path: '/tab4',
         id: 'tab4',
-        componentUrlAlias: './pages/tab_account.html',
+        componentUrlAlias: './pages/tab_living.html',
         async: tabAccountAsyncRoute
     }],
 }, {
