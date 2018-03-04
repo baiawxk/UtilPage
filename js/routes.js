@@ -1,24 +1,24 @@
 let _mainView_routes = [{
     "path": '/main',
-    url: './pages/qyjf_tab_page.ctp',
+    url: './pages/qyjf_tab_page.html',
     tabs: [{
         path: '/tab1',
         id: 'tab1',
-        componentUrlAlias: './pages/qyjf_tab_index.ctp',
+        componentUrlAlias: './pages/qyjf_tab_index.html',
         async: tabIndexAsyncRoute
     }, {
         path: '/tab2',
         id: 'tab2',
-        componentUrlAlias: './pages/qyjf_tab_trade.ctp',
+        componentUrlAlias: './pages/qyjf_tab_trade.html',
         async: tabTradeAsyncRoute
     }, {
         path: '/tab3',
         id: 'tab3',
-        componentUrl: './pages/qyjf_tab_stocks.ctp',
+        componentUrl: './pages/qyjf_tab_stocks.html',
     }, {
         path: '/tab4',
         id: 'tab4',
-        componentUrlAlias: './pages/qyjf_tab_account.ctp',
+        componentUrlAlias: './pages/qyjf_tab_account.html',
         async: tabAccountAsyncRoute
     }],
 }, {
@@ -35,54 +35,54 @@ let _mainView_routes = [{
     redirect: '/main/tab4'
 }, {
     path: '/checkLogin',
-    componentUrl: './pages/qyjf_check_login.ctp',
+    componentUrl: './pages/qyjf_check_login.html',
 }, {
     path: '/login',
-    componentUrl: './pages/qyjf_login.ctp',
+    componentUrl: './pages/qyjf_login.html',
 }, {
     path: '/recharge',
-    componentUrlAlias: './pages/qyjf_recharge.ctp',
+    componentUrlAlias: './pages/qyjf_recharge.html',
     async: rechargeAsyncRoute
 }, {
     path: '/reflect',
-    componentUrlAlias: './pages/qyjf_reflect.ctp',
+    componentUrlAlias: './pages/qyjf_reflect.html',
     async: reflectAsyncRoute
 }, {
     path: '/firstLogin',
-    componentUrl: './pages/qyjf_first_login.ctp',
+    componentUrl: './pages/qyjf_first_login.html',
 }, {
     path: '/fistAddInfo',
-    componentUrl: './pages/qyjf_first_add_person_info.ctp',
+    componentUrl: './pages/qyjf_first_add_person_info.html',
 }, {
     path: '/addBankInfo',
-    componentUrlAlias: './pages/qyjf_add_bankinfo.ctp',
+    componentUrlAlias: './pages/qyjf_add_bankinfo.html',
     async: addBankInfoAsyncRoute
 }, {
     path: '/investDoc',
-    componentUrl: './pages/qyjf_invest_doc.ctp',
+    componentUrl: './pages/qyjf_invest_doc.html',
 }, {
     path: '/wecharPay',
-    componentUrl: './pages/qyjf_wechatpay.ctp',
+    componentUrl: './pages/qyjf_wechatpay.html',
 }, {
     path: '/bankAcPay',
-    componentUrl: './pages/qyjf_bankacpay.ctp',
+    componentUrl: './pages/qyjf_bankacpay.html',
 }, {
     path: '/idConfirm',
-    componentUrlAlias: './pages/qyjf_id_confirm.ctp',
+    componentUrlAlias: './pages/qyjf_id_confirm.html',
     async: idConfirmAsyncRoute
 }, {
     path: '/customService',
-    componentUrl: './pages/qyjf_custom_service.ctp',
+    componentUrl: './pages/qyjf_custom_service.html',
 }, {
     path: '/publicService',
-    componentUrl: './pages/qyjf_public_service.ctp',
+    componentUrl: './pages/qyjf_public_service.html',
 }, {
     path: '/inviteCode',
-    componentUrlAlias: './pages/qyjf_invite_code.ctp',
+    componentUrlAlias: './pages/qyjf_invite_code.html',
     async: inviteCodeAsyncRoute
 }, {
     path: '/trade/:code',
-    componentUrlAlias: './pages/qyjf_tab_trade_detail.ctp',
+    componentUrlAlias: './pages/qyjf_tab_trade_detail.html',
     async: tradeDetailAsyncRoute
 }];
 
@@ -92,50 +92,14 @@ function tabIndexAsyncRoute(routeTo, routeFrom, resolve, reject) {
     var app = router.app;
     app.preloader.show();
     let ctx = {
-        userName: "",
-        totalMarketValue: "--",
-        hasLastLoginInfo: false,
-        lastIp: "--",
-        lastTime: '--',
-        lastChannel: "--",
-        photoSrc: '/img/qyjf/testphoto.png'
+        
     };
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
     let customSpec = {
         context: ctx
     }
-    $.when(fetchTotalMarketValue(), fetchAccountInfo(), fetchWechatPhoto())
-        .done(function(data) {
-            let userInfo = app.data.userInfo;
-            let accountInfo = app.data.accountInfo;
-            let loginInfo = app.data.loginInfo;
-            let marketAccountInfo = app.data.marketAccountInfo;
-            if (userInfo != null) {
-                ctx['userName'] = userInfo['name'] || userInfo['nick'];
-            }
-            if (marketAccountInfo != null) {
-                let total = marketAccountInfo['total'];
-                ctx['totalMarketValue'] = accounting.formatMoney(total);
-            }
-            if (loginInfo != null && loginInfo.length > 0) {
-                let lastLoign = loginInfo[0];
-                ctx['hasLastLoginInfo'] = true;
-                ctx['lastIp'] = lastLoign['ip'];
-                let symbol = ctx['lastIp'].indexOf('&');
-                if (symbol != -1) {
-                    ctx['lastIp'] = ctx['lastIp'].substring(0, symbol);
-                }
-                ctx['lastTime'] = lastLoign['created'];
-                ctx['lastChannel'] = lastLoign['msg'];
-            }
-            if (app.data.wechatPhoto != null) {
-                ctx['photoSrc'] = app.data.wechatPhoto;
-            }
-        })
-        .always(function() {
-            resolve(routeInfo, customSpec);
-            app.preloader.hide();
-        })
+    resolve(routeInfo, customSpec);
+    app.preloader.hide();
 }
 
 function tabAccountAsyncRoute(routeTo, routeFrom, resolve, reject) {
@@ -143,72 +107,29 @@ function tabAccountAsyncRoute(routeTo, routeFrom, resolve, reject) {
     var app = router.app;
     app.preloader.show();
     let ctx = {
-        money: "--",
-        hasBankCard: false,
-        showIdCardFunc: true
+        
     };
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
     let customSpec = {
         context: ctx
     }
-    $.when(fetchBankInfo(), fetchAccountInfo())
-        .done(function(data) {
-            let accountInfo = app.data.accountInfo;
-            let bankInfo = app.data.bankInfo;
-            let userInfo = app.data.userInfo;
-            if (accountInfo != null) {
-                ctx['money'] = accounting.formatMoney(accountInfo['total']);
-            }
-            if (bankInfo != null && bankInfo.length > 0) {
-                ctx['hasBankCard'] = true;
-            }
-            if (userInfo['status'] === "2") {
-                ctx['showIdCardFunc'] = false;
-            }
-        })
-        .always(function() {
-            resolve(routeInfo, customSpec);
-            app.preloader.hide();
-        })
+    resolve(routeInfo, customSpec);
+    app.preloader.hide();
 }
 
 function tabTradeAsyncRoute(routeTo, routeFrom, resolve, reject) {
-    var router = this;
+   var router = this;
     var app = router.app;
     app.preloader.show();
     let ctx = {
-        isTradeTime: false,
-        money: "--",
-        quotationList: []
+        
     };
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
     let customSpec = {
         context: ctx
     }
-    let fetchAry = [fetchAccountInfo()];
-    if (app.data.quotationList == null) fetchAry.push(fetchQuotations());
-    $.when.apply(null, fetchAry)
-        .done(function(data) {
-            let quotationList = app.data.quotationList;
-            let accountInfo = app.data.accountInfo;
-            if (quotationList != null) {
-                ctx['quotationList'] = quotationList;
-            }
-            if (accountInfo != null) {
-                ctx['money'] = accounting.formatMoney(accountInfo['total']);
-            }
-        })
-        .always(function() {
-            isServiceTime().then(function() {
-                    ctx['isTradeTime'] = true;
-                }, function() {
-                    ctx['isTradeTime'] = false;
-                })
-                .always(function() {
-                    resolve(routeInfo, customSpec);
-                    app.preloader.hide();
-                })
-        })
+    resolve(routeInfo, customSpec);
+    app.preloader.hide();
 }
 
 function rechargeAsyncRoute(routeTo, routeFrom, resolve, reject) {
