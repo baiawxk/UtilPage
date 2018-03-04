@@ -1,24 +1,24 @@
 let _mainView_routes = [{
     "path": '/main',
-    url: '/pages/get/qyjf_tab_page.ctp',
+    url: './pages/qyjf_tab_page.ctp',
     tabs: [{
         path: '/tab1',
         id: 'tab1',
-        componentUrlAlias: '/pages/get/qyjf_tab_index.ctp',
+        componentUrlAlias: './pages/qyjf_tab_index.ctp',
         async: tabIndexAsyncRoute
     }, {
         path: '/tab2',
         id: 'tab2',
-        componentUrlAlias: '/pages/get/qyjf_tab_trade.ctp',
+        componentUrlAlias: './pages/qyjf_tab_trade.ctp',
         async: tabTradeAsyncRoute
     }, {
         path: '/tab3',
         id: 'tab3',
-        componentUrl: '/pages/get/qyjf_tab_stocks.ctp',
+        componentUrl: './pages/qyjf_tab_stocks.ctp',
     }, {
         path: '/tab4',
         id: 'tab4',
-        componentUrlAlias: '/pages/get/qyjf_tab_account.ctp',
+        componentUrlAlias: './pages/qyjf_tab_account.ctp',
         async: tabAccountAsyncRoute
     }],
 }, {
@@ -35,54 +35,54 @@ let _mainView_routes = [{
     redirect: '/main/tab4'
 }, {
     path: '/checkLogin',
-    componentUrl: '/pages/get/qyjf_check_login.ctp',
+    componentUrl: './pages/qyjf_check_login.ctp',
 }, {
     path: '/login',
-    componentUrl: '/pages/get/qyjf_login.ctp',
+    componentUrl: './pages/qyjf_login.ctp',
 }, {
     path: '/recharge',
-    componentUrlAlias: '/pages/get/qyjf_recharge.ctp',
+    componentUrlAlias: './pages/qyjf_recharge.ctp',
     async: rechargeAsyncRoute
 }, {
     path: '/reflect',
-    componentUrlAlias: '/pages/get/qyjf_reflect.ctp',
+    componentUrlAlias: './pages/qyjf_reflect.ctp',
     async: reflectAsyncRoute
 }, {
     path: '/firstLogin',
-    componentUrl: '/pages/get/qyjf_first_login.ctp',
+    componentUrl: './pages/qyjf_first_login.ctp',
 }, {
     path: '/fistAddInfo',
-    componentUrl: '/pages/get/qyjf_first_add_person_info.ctp',
+    componentUrl: './pages/qyjf_first_add_person_info.ctp',
 }, {
     path: '/addBankInfo',
-    componentUrlAlias: '/pages/get/qyjf_add_bankinfo.ctp',
+    componentUrlAlias: './pages/qyjf_add_bankinfo.ctp',
     async: addBankInfoAsyncRoute
 }, {
     path: '/investDoc',
-    componentUrl: '/pages/get/qyjf_invest_doc.ctp',
+    componentUrl: './pages/qyjf_invest_doc.ctp',
 }, {
     path: '/wecharPay',
-    componentUrl: '/pages/get/qyjf_wechatpay.ctp',
+    componentUrl: './pages/qyjf_wechatpay.ctp',
 }, {
     path: '/bankAcPay',
-    componentUrl: '/pages/get/qyjf_bankacpay.ctp',
+    componentUrl: './pages/qyjf_bankacpay.ctp',
 }, {
     path: '/idConfirm',
-    componentUrlAlias: '/pages/get/qyjf_id_confirm.ctp',
+    componentUrlAlias: './pages/qyjf_id_confirm.ctp',
     async: idConfirmAsyncRoute
 }, {
     path: '/customService',
-    componentUrl: '/pages/get/qyjf_custom_service.ctp',
+    componentUrl: './pages/qyjf_custom_service.ctp',
 }, {
     path: '/publicService',
-    componentUrl: '/pages/get/qyjf_public_service.ctp',
+    componentUrl: './pages/qyjf_public_service.ctp',
 }, {
     path: '/inviteCode',
-    componentUrlAlias: '/pages/get/qyjf_invite_code.ctp',
+    componentUrlAlias: './pages/qyjf_invite_code.ctp',
     async: inviteCodeAsyncRoute
 }, {
     path: '/trade/:code',
-    componentUrlAlias: '/pages/get/qyjf_tab_trade_detail.ctp',
+    componentUrlAlias: './pages/qyjf_tab_trade_detail.ctp',
     async: tradeDetailAsyncRoute
 }];
 
