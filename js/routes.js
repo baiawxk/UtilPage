@@ -5,20 +5,32 @@ let _mainView_routes = [{
         path: '/tab1',
         id: 'tab1',
         componentUrlAlias: './pages/tab_index.html',
+        options: {
+            animate: false,
+        },
         async: tabIndexAsyncRoute
     }, {
         path: '/tab2',
         id: 'tab2',
         componentUrlAlias: './pages/tab_coding.html',
+        options: {
+            animate: false,
+        },
         async: tabTradeAsyncRoute
     }, {
         path: '/tab3',
         id: 'tab3',
         componentUrl: './pages/tab_working.html',
+        options: {
+            animate: false,
+        },
     }, {
         path: '/tab4',
         id: 'tab4',
         componentUrlAlias: './pages/tab_living.html',
+        options: {
+            animate: false,
+        },
         async: tabAccountAsyncRoute
     }],
 }, {
@@ -92,7 +104,7 @@ function tabIndexAsyncRoute(routeTo, routeFrom, resolve, reject) {
     var app = router.app;
     app.preloader.show();
     let ctx = {
-        
+
     };
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
     let customSpec = {
@@ -107,7 +119,7 @@ function tabAccountAsyncRoute(routeTo, routeFrom, resolve, reject) {
     var app = router.app;
     app.preloader.show();
     let ctx = {
-        
+
     };
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
     let customSpec = {
@@ -118,11 +130,11 @@ function tabAccountAsyncRoute(routeTo, routeFrom, resolve, reject) {
 }
 
 function tabTradeAsyncRoute(routeTo, routeFrom, resolve, reject) {
-   var router = this;
+    var router = this;
     var app = router.app;
     app.preloader.show();
     let ctx = {
-        
+
     };
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
     let customSpec = {

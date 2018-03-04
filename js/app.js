@@ -12,7 +12,9 @@ var app = new Framework7({
 var $$ = Dom7;
 
 fixAosHeight();
-var mainView = app.views.create('.view-main');
+var mainView = app.views.create('.view-main',{
+    url:'/tabPage'
+});
 mainView.router.on('routerAjaxError', function() {
     qAlert('网络繁忙，请稍后重试');
 });

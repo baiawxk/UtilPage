@@ -1,4 +1,5 @@
 accounting.settings.currency.symbol = '￥';
+let _appTitle = 'UtilPage';
 Template7.registerHelper('formatMoney', accounting.formatMoney);
 
 function qAlert(msg) {
