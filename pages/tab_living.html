@@ -1,18 +1,26 @@
 <template>
-  <div data-page="living" class="page">
-    <div class="page-content">
-      <h1>living</h1>
+    <div data-page="living" class="page">
+        <div class="page-content">
+            <div class="block">
+                <h3>电影下载</h3>
+                <div class="list links-list">
+                    <ul>
+                        {{#each movieMenu}}
+                        <li><a href="#" onclick="window.open('{{url}}');">{{name}}</a></li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 <script>
 return {
-  methods: {
-    updateMoney: function() {}
-  },
-  on: {
-    pageInit: function() {}
-  }
+    methods: {
+        updateMoney: function() {}
+    },
+    on: {
+        pageInit: function() {}
+    }
 }
-
 </script>

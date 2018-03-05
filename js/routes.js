@@ -32,7 +32,7 @@ let _mainView_routes = [{
         options: {
             animate: false,
         },
-        async: tabAccountAsyncRoute
+        async: tabLifeAsyncRoute
     }],
 }, {
     path: '/tabPage',
@@ -105,7 +105,7 @@ function tabIndexAsyncRoute(routeTo, routeFrom, resolve, reject) {
     var app = router.app;
     app.preloader.show();
     let ctx = {
-        techMenu:_.filter(_menus,{type:"tech"}),
+        techMenu: _.filter(_menus, { type: "tech" }),
     };
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
     let customSpec = {
@@ -115,12 +115,12 @@ function tabIndexAsyncRoute(routeTo, routeFrom, resolve, reject) {
     app.preloader.hide();
 }
 
-function tabAccountAsyncRoute(routeTo, routeFrom, resolve, reject) {
+function tabLifeAsyncRoute(routeTo, routeFrom, resolve, reject) {
     var router = this;
     var app = router.app;
     app.preloader.show();
     let ctx = {
-
+        movieMenu: _.filter(_menus, { type: "movie" }),
     };
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
     let customSpec = {
@@ -135,8 +135,8 @@ function tabCodeAsyncRoute(routeTo, routeFrom, resolve, reject) {
     var app = router.app;
     app.preloader.show();
     let ctx = {
-        toolMenu:_.filter(_menus,{type:"tool"}),
-        apiMenu:_.filter(_menus,{type:"api"})
+        toolMenu: _.filter(_menus, { type: "tool" }),
+        apiMenu: _.filter(_menus, { type: "api" })
     };
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
     let customSpec = {
@@ -151,7 +151,7 @@ function tabWorkAsyncRoute(routeTo, routeFrom, resolve, reject) {
     var app = router.app;
     app.preloader.show();
     let ctx = {
-        jobMenu:_.filter(_menus,{type:"job"})
+        jobMenu: _.filter(_menus, { type: "job" })
     };
     console.table(ctx['jobMenu']);
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
