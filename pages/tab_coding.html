@@ -1,7 +1,26 @@
 <template>
     <div data-page="coding" class="page">
         <div class="page-content">
-          <h1>Coding</h1>
+            <div class="block">
+                <h3>Tool</h3>
+                <div class="list links-list">
+                    <ul>
+                        {{#each toolMenu}}
+                        <li><a href="#" onclick="window.open('{{url}}');">{{name}}</a></li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+            <div class="block">
+                <h3>API</h3>
+                <div class="list links-list">
+                    <ul>
+                        {{#each apiMenu}}
+                        <li><a href="#" onclick="window.open('{{url}}');">{{name}}</a></li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -13,4 +32,3 @@ return {
     }
 }
 </script>
-

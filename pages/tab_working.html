@@ -1,13 +1,24 @@
 <template>
     <div data-page="working" class="page">
         <div class="page-content">
-        	<h1>working</h1>
+            <div class="block">
+                <h3>Work</h3>
+                <div class="list links-list">
+                    <ul>
+                        {{#each jobMenu}}
+                        <li><a href="#" onclick="window.open('{{url}}');">{{name}}</a></li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 <script>
 return {
-    methods: {},
+    methods: {
+
+    },
     on: {
         tabInit: function() {}
     }

@@ -1,0 +1,10 @@
+let XLSX = require('xlsx');
+let wb = XLSX.readFile('menu.xlsx');
+let sheetName = wb['SheetNames'][0];
+let sheet = wb['Sheets'][sheetName];
+let menuAry = XLSX.utils.sheet_to_json(sheet);
+let jsonStr = JSON.stringify(menuAry);
+let jsStr = `let _menus = ${jsonStr};`;
+let fs = require('fs');
+fs.writeFileSync('./menu.js',jsStr);
+console.log('done');

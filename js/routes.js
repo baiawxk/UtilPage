@@ -16,14 +16,15 @@ let _mainView_routes = [{
         options: {
             animate: false,
         },
-        async: tabTradeAsyncRoute
+        async: tabCodeAsyncRoute
     }, {
         path: '/tab3',
         id: 'tab3',
-        componentUrl: './pages/tab_working.html',
+        componentUrlAlias: './pages/tab_working.html',
         options: {
             animate: false,
         },
+        async: tabWorkAsyncRoute
     }, {
         path: '/tab4',
         id: 'tab4',
@@ -129,13 +130,30 @@ function tabAccountAsyncRoute(routeTo, routeFrom, resolve, reject) {
     app.preloader.hide();
 }
 
-function tabTradeAsyncRoute(routeTo, routeFrom, resolve, reject) {
+function tabCodeAsyncRoute(routeTo, routeFrom, resolve, reject) {
     var router = this;
     var app = router.app;
     app.preloader.show();
     let ctx = {
-
+        toolMenu:_.filter(_menus,{type:"tool"}),
+        apiMenu:_.filter(_menus,{type:"api"})
     };
+    let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
+    let customSpec = {
+        context: ctx
+    }
+    resolve(routeInfo, customSpec);
+    app.preloader.hide();
+}
+
+function tabWorkAsyncRoute(routeTo, routeFrom, resolve, reject) {
+    var router = this;
+    var app = router.app;
+    app.preloader.show();
+    let ctx = {
+        jobMenu:_.filter(_menus,{type:"job"})
+    };
+    console.table(ctx['jobMenu']);
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
     let customSpec = {
         context: ctx
