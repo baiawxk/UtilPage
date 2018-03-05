@@ -1,20 +1,28 @@
 <template>
-  <div data-page="index" id="index" class="page">
-    <div class="page-content" >
-      <h1>index</h1>
+    <div data-page="index" id="index" class="page">
+        <div class="page-content">
+            <div class="block">
+                <h3>Technology</h3>
+                <div class="list links-list">
+                    <ul>
+                        {{#each techMenu}}
+                        <li><a href="#" onclick="window.open('{{url}}');">{{name}}</a></li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 <script>
 return {
-  methods: {
+    methods: {
 
-  },
-  on: {
-    tabInit:function() {
-      
+    },
+    on: {
+        tabInit: function() {
+
+        }
     }
-  }
 }
-
 </script>

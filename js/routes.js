@@ -105,7 +105,7 @@ function tabIndexAsyncRoute(routeTo, routeFrom, resolve, reject) {
     var app = router.app;
     app.preloader.show();
     let ctx = {
-
+        techMenu:_.filter(_menus,{type:"tech"}),
     };
     let routeInfo = { componentUrl: routeTo.route.tab.componentUrlAlias };
     let customSpec = {

@@ -6,5 +6,5 @@ let menuAry = XLSX.utils.sheet_to_json(sheet);
 let jsonStr = JSON.stringify(menuAry);
 let jsStr = `let _menus = ${jsonStr};`;
 let fs = require('fs');
-fs.writeFileSync('./menu.js',jsStr);
+fs.writeFileSync('../js/menu.js',jsStr);
 console.log('done');
