@@ -44,7 +44,7 @@
     $(function() {
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js?v=1.1', { scope: '/' })
+                navigator.serviceWorker.register('./sw.js?v=1', { scope: '/' })
                     .then(function(registration) {
                         console.log('ServiceWorker registration successful with scope: ', registration.scope);
                     })
