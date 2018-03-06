@@ -1,0 +1,14 @@
+{
+	"name":"Welcome UtilPage",
+	"short_name":"UtilPage",
+	"icons":[
+		{
+			"src":"",
+			"type":"image/png",
+			"sizes":"48x48"
+		}
+	],
+	"background_color":"black",
+	"display":"fullscreen",
+	"start_url":"./index.html"
+}
