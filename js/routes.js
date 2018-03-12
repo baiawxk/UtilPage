@@ -1,52 +1,60 @@
 let _mainView_routes = [{
-    path: '/main',
-    url: './pages/tab_page.html',
-    tabs: [{
-        path: '/tab1',
-        id: 'tab1',
-        componentUrlAlias: './pages/tab_index.html',
-        options: {
-            animate: true,
-        },
-        async: tabIndexAsyncRoute
+        path: '/main',
+        url: './pages/tab_page.html',
+        tabs: [
+
+            {
+                path: '/tab1',
+                id: 'tab1',
+                componentUrlAlias: './pages/tab_index.html',
+                options: {
+                    animate: true,
+                },
+                async: tabIndexAsyncRoute
+            }, {
+                path: '/tab2',
+                id: 'tab2',
+                componentUrlAlias: './pages/tab_coding.html',
+                options: {
+                    animate: true,
+                },
+                async: tabCodeAsyncRoute
+            }, {
+                path: '/tab3',
+                id: 'tab3',
+                componentUrlAlias: './pages/tab_working.html',
+                options: {
+                    animate: true,
+                },
+                async: tabWorkAsyncRoute
+            }, {
+                path: '/tab4',
+                id: 'tab4',
+                componentUrlAlias: './pages/tab_living.html',
+                options: {
+                    animate: true,
+                },
+                async: tabLifeAsyncRoute
+            }
+        ],
     }, {
-        path: '/tab2',
-        id: 'tab2',
-        componentUrlAlias: './pages/tab_coding.html',
-        options: {
-            animate: true,
-        },
-        async: tabCodeAsyncRoute
+        path: '/tabPage',
+        redirect: '/main/tab1'
     }, {
-        path: '/tab3',
-        id: 'tab3',
-        componentUrlAlias: './pages/tab_working.html',
-        options: {
-            animate: true,
-        },
-        async: tabWorkAsyncRoute
+        path: '/codePage',
+        redirect: '/main/tab2'
     }, {
-        path: '/tab4',
-        id: 'tab4',
-        componentUrlAlias: './pages/tab_living.html',
-        options: {
-            animate: true,
-        },
-        async: tabLifeAsyncRoute
-    }],
-}, {
-    path: '/tabPage',
-    redirect: '/main/tab1'
-}, {
-    path: '/codePage',
-    redirect: '/main/tab2'
-}, {
-    path: '/workPage',
-    redirect: '/main/tab3'
-}, {
-    path: '/livePage',
-    redirect: '/main/tab4'
-}];
+        path: '/workPage',
+        redirect: '/main/tab3'
+    }, {
+        path: '/livePage',
+        redirect: '/main/tab4'
+    }, {
+        path: '/jsMemo',
+        componentUrl: './pages/jsMemo.html'
+    }
+
+];
 
 
 function tabIndexAsyncRoute(routeTo, routeFrom, resolve, reject) {
