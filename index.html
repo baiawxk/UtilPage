@@ -42,6 +42,7 @@
     <script type="text/javascript" src="./js/app.js"></script>
     <script>
     $(function() {
+        return ;
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('./sw.js?v=1', { scope: '/UtilPage/' })

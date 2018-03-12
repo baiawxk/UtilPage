@@ -11,7 +11,7 @@ var app = new Framework7({
 // Export selectors engine
 var $$ = Dom7;
 
-fixAosHeight();
+// fixAosHeight();
 var mainView = app.views.create('.view-main',{
     url:'/tabPage'
 });
