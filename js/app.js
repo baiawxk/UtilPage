@@ -1,7 +1,7 @@
 // Initialize your app
 var app = new Framework7({
     root: '#app',
-    theme: "ios",
+    // theme: "ios",
     view: {
         iosDynamicNavbar: false,
     },
