@@ -1,18 +1,20 @@
 {
-	"name":"UtilPage",
-	"short_name":"UtilPage",
-	"icons":[
+	"name": "UtilPage",
+	"short_name": "UtilPage",
+	"icons": [
 		{
-			"src":"",
-			"type":"image/png",
-			"sizes":"144x144"
+			"src": "",
+			"type": "image/png",
+			"sizes": "144x144"
 		}
 	],
-	"background_color":"black",
-	"display":"fullscreen",
-	"related_applications":[{
-		"platform":"play",
-		"id":"baiawxk.github.io"
-	}],
-	"start_url":"./index.html"
+	"background_color": "black",
+	"display": "fullscreen",
+	"related_applications": [
+		{
+			"platform": "play",
+			"id": "baiawxk.github.io"
+		}
+	],
+	"start_url": "./index.html"
 }
