@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.bochk.com.sit",
+    "sha256_cert_fingerprints":
+    ["4F:05:23:56:16:E3:B8:46:A7:F9:D5:CD:64:FE:50:F3:57:0D:D4:83:3B:2D:5D:A9:11:82:64:35:08:EC:A6:DB"]
+  }
+}]
