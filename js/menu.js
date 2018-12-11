@@ -1,10 +1,4 @@
 let _menus = [{
-    "Seq": "0",
-    "type": "api",
-    "id": "apidocs",
-    "name": "APIDocs",
-    "url": "https://github.com/baiawxk/api?a=13&b=13&c=132"
-}, {
     "Seq": "1",
     "type": "api",
     "id": "apidocs",
