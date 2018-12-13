@@ -4,6 +4,22 @@
     "namespace": "android_app",
     "package_name": "com.bochk.com.sit",
     "sha256_cert_fingerprints":
-    ["4F:05:23:56:16:E3:B8:46:A7:F9:D5:CD:64:FE:50:F3:57:0D:D4:83:3B:2D:5D:A9:11:82:64:35:08:EC:A6:DB"]
+    ["C6:13:A3:3A:A9:C9:0C:E3:98:A6:65:44:68:97:40:73:C9:75:50:97:59:2E:77:81:4E:C1:A4:8E:9E:68:B3:AB"]
+  }
+},
+{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "web",
+    "site": "https://baiawxk.xyz"
+  }
+},
+{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.bochk.com.sit",
+    "sha256_cert_fingerprints":
+    ["C6:13:A3:3A:A9:C9:0C:E3:98:A6:65:44:68:97:40:73:C9:75:50:97:59:2E:77:81:4E:C1:A4:8E:9E:68:B3:AB"]
   }
 }]
